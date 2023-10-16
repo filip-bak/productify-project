@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+.vscode
+.env
+backend/src/config/config.php
+
 # testing
 /coverage
 
