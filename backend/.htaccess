@@ -1,0 +1,2 @@
+RewriteEngite On
+RewriteRule . index.php
