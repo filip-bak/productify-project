@@ -1,0 +1,18 @@
+@use "./variables.scss" as *;
+@use "sass:map";
+
+// MEDIA QUERY
+@mixin mq($key, $add: null, $key2: null) {
+    $size: map.get($breakpoints, $key);
+    $size2: map.get($breakpoints, $key2);
+
+    @if ($add == null) {
+        @media screen and (min-width: $size) {
+            @content;
+        }
+    } @else if ($add == and) {
+        @media screen and (min-width: $size) and (max-width: calc($size2 - 1px)) {
+            @content;
+        }
+    }
+}

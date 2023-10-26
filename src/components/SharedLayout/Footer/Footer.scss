@@ -1,0 +1,22 @@
+@use "/src/styles/abstracts/mixins" as *;
+
+.footer {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    gap: 4px;
+    padding-block: 1rem;
+
+    font-weight: 600;
+
+    grid-area: footer;
+
+    &__accent {
+        color: orangered;
+    }
+
+    @include mq(mobile-lg) {
+        grid-template-columns: 1fr auto 1fr;
+    }
+}

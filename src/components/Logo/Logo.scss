@@ -1,0 +1,44 @@
+@use "/src/styles/abstracts//mixins" as *;
+
+.logo {
+    isolation: isolate;
+    justify-self: center;
+    padding-inline: 3px;
+    position: relative;
+
+    &__text {
+        color: #1e90ff;
+        font-family: "Black Ops One", sans-serif;
+        font-size: 20px;
+        text-decoration: none;
+    }
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        background-color: transparent;
+        border-radius: 3px;
+
+        padding-block: 0.75rem;
+        padding-inline: 1.4rem;
+
+        z-index: -1;
+    }
+
+    &::before {
+        left: 0;
+        top: -1px;
+        box-shadow: -2px 1px 0 0 rgb(0 0 0 / 0.5);
+    }
+    &::after {
+        content: "";
+        right: 0;
+        top: -1px;
+        box-shadow: 2px -1px 0 0 rgb(0 0 0 / 0.5);
+    }
+
+    @include mq(mobile-lg) {
+        justify-self: flex-start;
+    }
+}

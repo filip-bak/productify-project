@@ -1,0 +1,22 @@
+@use "../../styles/abstracts/mixins" as *;
+
+.label {
+    --_columns: 1fr;
+
+    display: grid;
+    grid-template-columns: var(--_columns);
+    align-items: center;
+
+    @include mq(mobile-md) {
+        --_columns: 0.4fr 1fr;
+    }
+}
+
+.input {
+    justify-self: start;
+    max-width: 40%;
+
+    @include mq(mobile-md) {
+        max-width: 50%;
+    }
+}

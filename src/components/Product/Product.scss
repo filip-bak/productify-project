@@ -1,0 +1,25 @@
+.product {
+    position: relative;
+    border: 2px solid black;
+    padding-inline: 1rem;
+    padding-block: 2rem;
+    border-radius: 3px;
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        list-style: none;
+        padding: 0.5rem;
+        margin: 0;
+    }
+}
+.delete-checkbox {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+
+    top: 1rem;
+    left: 1rem;
+}

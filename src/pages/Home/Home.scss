@@ -1,0 +1,27 @@
+@use "/src/styles/abstracts/mixins" as *;
+
+.container {
+    --_column-count: 1;
+    --_fr: 0.8fr;
+    --_gap: 1rem;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(var(--_column-count), var(--_fr));
+    grid-area: main;
+
+    justify-content: center;
+
+    gap: var(--_gap);
+
+    @include mq(mobile-lg) {
+        --_column-count: 2;
+        --_fr: 1fr;
+        --_gap: 2rem;
+    }
+    @include mq(tablet, and, laptop) {
+        --_column-count: 3;
+    }
+    @include mq(laptop) {
+        --_column-count: 4;
+    }
+}

@@ -1,0 +1,46 @@
+// Change grid-template-areas  and  grid-template-rows auto auto 1fr auto ON MOBILE
+// "header"
+// "nav"
+// "main"
+// "footer"
+@use "../abstracts/mixins" as *;
+
+.wrapper {
+    max-width: 1280px;
+    height: 100vh;
+    height: 100dvh;
+
+    margin-inline: auto;
+    padding-inline: 2rem;
+    padding-top: 1rem;
+
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+        "header"
+        "nav"
+        "main"
+        "footer";
+
+    @include mq(mobile-lg) {
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+            "header header nav"
+            "main   main   main"
+            "footer footer footer";
+    }
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-right: 0;
+    grid-area: nav;
+
+    @include mq(mobile-lg) {
+        justify-content: end;
+        margin-right: 2rem;
+    }
+}
