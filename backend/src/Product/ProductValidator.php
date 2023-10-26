@@ -5,47 +5,49 @@ class ProductValidator
     public function getValidationErrors(array $data): array
     {
         $errors = [];
-
-        if (empty($data["sku"])) {
+        if (empty($data["sku"]) || $data["sku"] === "") {
             $errors[] = "sku is required";
         }
         if (empty($data["name"])) {
             $errors[] = "name is required";
         }
-        if (empty($data["price"])) {
-            $errors[] = "price is required";
-        }
+
+        $errors = array_merge($errors, $this->validateProductProperty("price", $data));
+
         if (empty($data["type"])) {
             $errors[] = "type is required";
         }
 
-        $errors = $this->validateProductTypes($data, $errors);
+        if (count($errors) === 0)
+            $errors = $this->validateProductTypes($data);
 
         return $errors;
     }
 
-
-
-    private function validateProductTypes(array $data, array $errors): array
+    private function validateProductTypes(array $data): array
     {
+
+        $errors = [];
+
         if (!array_key_exists("type", $data)) return $errors;
 
         switch ($data["type"]) {
             case 'Book':
-                return $this->validateTypeProperties("weight", $data);
+                return [...$this->validateProductProperty("weight", $data)];
             case 'DVD':
-                return $this->validateTypeProperties("size", $data, FILTER_VALIDATE_INT);
+                return [...$this->validateProductProperty("size", $data, FILTER_VALIDATE_INT)];
             case 'Furniture':
-                $widthErr = $this->validateTypeProperties("width", $data);
-                $heightErr = $this->validateTypeProperties("height", $data);
-                $lengthErr = $this->validateTypeProperties("length", $data);
+                $widthErr = $this->validateProductProperty("width", $data);
+                $heightErr = $this->validateProductProperty("height", $data);
+                $lengthErr = $this->validateProductProperty("length", $data);
 
                 return [...$widthErr, ...$heightErr, ...$lengthErr];
         }
+
         return $errors;
     }
 
-    private function validateTypeProperties(string $key, array $data, int $filter = FILTER_VALIDATE_FLOAT): array
+    private function validateProductProperty(string $key, array $data, int $filter = FILTER_VALIDATE_FLOAT)
     {
         $errors = [];
 
@@ -56,6 +58,7 @@ class ProductValidator
         } else {
             $errors[] = "$key is required";
         }
+
         return $errors;
     }
 }

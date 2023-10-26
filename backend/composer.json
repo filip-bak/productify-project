@@ -1,0 +1,10 @@
+{
+  "name": "productify/backend",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Filip Bączkowski",
+      "email": "filo.b@wp.pl"
+    }
+  ]
+}

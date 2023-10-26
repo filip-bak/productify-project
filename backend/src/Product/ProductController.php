@@ -11,6 +11,7 @@ class ProductController
         'GET' => 'handleGetAllProducts',
         'POST' => 'handleAddProduct',
         'DELETE' => 'handleDeleteProducts',
+        "OPTIONS" => "handleCors"
     ];
 
 
@@ -25,15 +26,14 @@ class ProductController
 
     private function handleCollectionRequest(string $method)
     {
-
         if (isset($this->validMethods[$method])) {
             $handlerMethod = $this->validMethods[$method];
 
             $this->$handlerMethod();
-            return;
+        } else {
+            http_response_code(405);
+            header("Allow: GET, POST, DELETE");
         }
-        http_response_code(405);
-        header("Allow: GET, POST, DELETE");
     }
 
     private function handleGetAllProducts()
@@ -64,8 +64,8 @@ class ProductController
         // Request
         try {
             $product = ProductBuilder::createProduct($data);
-
             $this->gateway->addProduct($product);
+
             http_response_code(201);
             echo json_encode([
                 "message" => "Product added",
@@ -82,12 +82,13 @@ class ProductController
     }
     private function handleDeleteProducts()
     {
-        $body = json_decode(file_get_contents('php://input'), true);
+        $data = (array) json_decode(file_get_contents("php://input"), true);
 
-        $productIds = $body['productIds'] ?? [];
+        $productIds = $data['productIds'] ?? [];
         try {
 
             $rows = $this->gateway->deleteProducts($productIds);
+
 
             if ($rows === 0) {
                 http_response_code(404);
@@ -104,5 +105,16 @@ class ProductController
             http_response_code($e->getCode());
             echo json_encode(["message" => $e->getMessage()]);
         }
+    }
+
+    private function handleCors()
+    {
+        header("Access-Control-Allow-Origin: https://productify-project.000webhostapp.com");
+        header("Access-Control-Allow-Methods: GET, POST, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type");
+        header("Access-Control-Max-Age: 3600");
+        header("Content-Length: 0");
+        http_response_code(204);
+        exit;
     }
 }

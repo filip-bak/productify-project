@@ -8,6 +8,7 @@
 .vscode
 .env
 backend/src/config/config.php
+backend-hosted/api/src/config/config.php
 
 # testing
 /coverage

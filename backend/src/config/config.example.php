@@ -4,9 +4,9 @@ return [
     "database" => [
         "config" => [
             "host" => "localhost",
-            "dbname" => "",
+            "dbname" => "mydatabase",
         ],
-        "username" => "",
+        "username" => "root",
         "password" => ""
     ],
 ];

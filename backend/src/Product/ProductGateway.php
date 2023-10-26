@@ -66,7 +66,6 @@ class ProductGateway
 
             $stmt->execute();
 
-
             return $stmt->rowCount();
         } catch (PDOException $e) {
             http_response_code($e->getCode());
