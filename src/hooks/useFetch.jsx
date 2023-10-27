@@ -18,7 +18,6 @@ const useFetch = ({ url }) => {
         const response = await axios.get(url, {
           signal: controller.signal,
         });
-        console.log('API: ', response.data);
         setData(response.data);
       } catch (err) {
         console.error(err);

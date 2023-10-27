@@ -54,8 +54,6 @@ const ProductForm = () => {
   const handleChange = (e) => {
     const { id, value } = e.target;
 
-    console.log('targetValue', value);
-
     setProduct((prevProduct) => ({
       ...prevProduct,
       [id]: value,
@@ -70,8 +68,6 @@ const ProductForm = () => {
       [name]: value,
     }));
   };
-
-  console.log('PRODUCT', product);
 
   return (
     <>

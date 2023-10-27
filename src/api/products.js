@@ -20,7 +20,6 @@ export const productsApi = {
       const { data } = await axios.post('/products/delete', {
         productIds,
       });
-      console.log(data);
       return data;
     } catch (err) {
       console.error(err);
